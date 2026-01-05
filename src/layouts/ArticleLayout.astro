@@ -1,0 +1,150 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	publishDate: string;
+	category: string;
+}
+
+const { title, description, publishDate, category } = Astro.props;
+
+const categoryNames: { [key: string]: string } = {
+	'beginners': 'Best for Beginners',
+	'comparisons': 'Comparisons',
+	'free-tools': 'Free Tools',
+	'low-end-pc': 'Low-End PC',
+	'guides': 'Guides'
+};
+---
+
+<Layout title={`${title} | VideoEditChoice`} description={description}>
+	<article>
+		<header class="article-header">
+			<a href={`/category/${category}`} class="category-badge">{categoryNames[category]}</a>
+			<h1>{title}</h1>
+			<div class="article-meta">
+				<time datetime={publishDate}>{new Date(publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+			</div>
+		</header>
+		<div class="article-content">
+			<slot />
+		</div>
+	</article>
+</Layout>
+
+<style>
+	article {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.article-header {
+		margin-bottom: 3rem;
+		padding-bottom: 2rem;
+		border-bottom: 1px solid #e5e5e5;
+	}
+
+	.category-badge {
+		display: inline-block;
+		background: #f0f0f0;
+		color: #555;
+		padding: 0.4rem 0.9rem;
+		border-radius: 4px;
+		font-size: 0.85rem;
+		font-weight: 600;
+		margin-bottom: 1rem;
+		text-decoration: none;
+		transition: background 0.2s;
+	}
+
+	.category-badge:hover {
+		background: #e5e5e5;
+		text-decoration: none;
+	}
+
+	.article-header h1 {
+		font-size: 2.75rem;
+		line-height: 1.2;
+		margin-bottom: 1rem;
+		color: #111;
+	}
+
+	.article-meta {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		color: #666;
+		font-size: 0.95rem;
+	}
+
+	.article-content {
+		font-size: 1.1rem;
+		line-height: 1.8;
+	}
+
+	.article-content :global(h2) {
+		font-size: 2rem;
+		margin-top: 3rem;
+		margin-bottom: 1rem;
+		color: #111;
+	}
+
+	.article-content :global(h3) {
+		font-size: 1.5rem;
+		margin-top: 2.5rem;
+		margin-bottom: 0.75rem;
+		color: #111;
+	}
+
+	.article-content :global(p) {
+		margin-bottom: 1.5rem;
+	}
+
+	.article-content :global(ul),
+	.article-content :global(ol) {
+		margin-bottom: 1.5rem;
+		line-height: 1.8;
+	}
+
+	.article-content :global(li) {
+		margin-bottom: 0.75rem;
+	}
+
+	.article-content :global(strong) {
+		font-weight: 600;
+		color: #111;
+	}
+
+	.article-content :global(a) {
+		color: #0066cc;
+		font-weight: 500;
+	}
+
+	.article-content :global(blockquote) {
+		border-left: 4px solid #0066cc;
+		padding-left: 1.5rem;
+		margin: 2rem 0;
+		color: #555;
+		font-style: italic;
+	}
+
+	@media (max-width: 768px) {
+		.article-header h1 {
+			font-size: 2rem;
+		}
+
+		.article-content {
+			font-size: 1rem;
+		}
+
+		.article-content :global(h2) {
+			font-size: 1.75rem;
+		}
+
+		.article-content :global(h3) {
+			font-size: 1.35rem;
+		}
+	}
+</style>

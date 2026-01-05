@@ -1,0 +1,120 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+	<div class="footer-container">
+		<div class="footer-content">
+			<div class="footer-section">
+				<h3>VideoEditChoice</h3>
+				<p>Helping beginners choose video editing software they won't quit in a week.</p>
+			</div>
+			<div class="footer-section">
+				<h4>Categories</h4>
+				<ul>
+					<li><a href="/category/beginners">Best for Beginners</a></li>
+					<li><a href="/category/comparisons">Comparisons</a></li>
+					<li><a href="/category/free-tools">Free Tools</a></li>
+					<li><a href="/category/low-end-pc">Low-End PC</a></li>
+					<li><a href="/category/guides">Guides</a></li>
+				</ul>
+			</div>
+			<div class="footer-section">
+				<h4>Legal</h4>
+				<ul>
+					<li><a href="/about">About</a></li>
+					<li><a href="/contact">Contact</a></li>
+					<li><a href="/affiliate-disclosure">Affiliate Disclosure</a></li>
+					<li><a href="/privacy-policy">Privacy Policy</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<p>&copy; {currentYear} VideoEditChoice. All rights reserved.</p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	footer {
+		background: #f8f8f8;
+		border-top: 1px solid #e5e5e5;
+		margin-top: 4rem;
+	}
+
+	.footer-container {
+		width: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 3rem 1.5rem 1.5rem;
+	}
+
+	.footer-content {
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr;
+		gap: 2rem;
+		margin-bottom: 2rem;
+	}
+
+	.footer-section h3 {
+		font-size: 1.25rem;
+		margin-bottom: 0.75rem;
+		color: #111;
+	}
+
+	.footer-section h4 {
+		font-size: 1rem;
+		margin-bottom: 0.75rem;
+		color: #111;
+		font-weight: 600;
+	}
+
+	.footer-section p {
+		color: #666;
+		margin-bottom: 0;
+		line-height: 1.6;
+	}
+
+	.footer-section ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.footer-section ul li {
+		margin-bottom: 0.5rem;
+	}
+
+	.footer-section ul li a {
+		color: #666;
+		font-size: 0.95rem;
+		transition: color 0.2s;
+	}
+
+	.footer-section ul li a:hover {
+		color: #0066cc;
+	}
+
+	.footer-bottom {
+		padding-top: 2rem;
+		border-top: 1px solid #e5e5e5;
+		text-align: center;
+	}
+
+	.footer-bottom p {
+		color: #888;
+		font-size: 0.9rem;
+		margin: 0;
+	}
+
+	@media (max-width: 768px) {
+		.footer-content {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.footer-container {
+			padding: 2rem 1rem 1rem;
+		}
+	}
+</style>

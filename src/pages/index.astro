@@ -1,0 +1,244 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getCollection('articles');
+const featuredArticles = allArticles.filter(article => article.data.featured).slice(0, 3);
+---
+
+<Layout
+	title="VideoEditChoice - Choose Video Editing Software You Won't Quit"
+	description="Honest, practical guides helping complete beginners choose the right video editing software without confusion or overwhelm."
+>
+	<div class="hero">
+		<h1>Choose Video Editing Software You Won't Quit in a Week</h1>
+		<p class="hero-subtitle">
+			If you're a complete beginner confused about which video editing software to use, you're in the right place.
+			We help you make the right choice based on your actual needs, not marketing hype.
+		</p>
+	</div>
+
+	<section class="intro">
+		<h2>Why This Site Exists</h2>
+		<p>
+			Most beginners download video editing software based on YouTube recommendations or flashy ads,
+			only to quit within days because the tool doesn't match their needs, computer specs, or skill level.
+		</p>
+		<p>
+			This website cuts through the noise. We tell you who each software is actually for,
+			what learning curve to expect, and whether your PC can handle it. No fluff, no affiliate spam.
+		</p>
+	</section>
+
+	<section class="categories">
+		<h2>Find What You Need</h2>
+		<div class="category-grid">
+			<a href="/category/beginners" class="category-card">
+				<h3>Best for Beginners</h3>
+				<p>Easy-to-learn software that won't overwhelm you on day one</p>
+			</a>
+			<a href="/category/comparisons" class="category-card">
+				<h3>Comparisons</h3>
+				<p>Head-to-head comparisons to help you decide between 2-3 options</p>
+			</a>
+			<a href="/category/free-tools" class="category-card">
+				<h3>Free Tools</h3>
+				<p>Zero-cost options that actually work for beginners</p>
+			</a>
+			<a href="/category/low-end-pc" class="category-card">
+				<h3>Low-End PC Tools</h3>
+				<p>Software that runs smoothly on older or budget computers</p>
+			</a>
+			<a href="/category/guides" class="category-card">
+				<h3>Beginner Guides</h3>
+				<p>Practical advice on choosing and starting with video editing</p>
+			</a>
+		</div>
+	</section>
+
+	{featuredArticles.length > 0 && (
+		<section class="featured">
+			<h2>Popular Articles</h2>
+			<div class="article-grid">
+				{featuredArticles.map(article => (
+					<a href={`/articles/${article.slug}`} class="article-card">
+						<span class="article-category">{article.data.category}</span>
+						<h3>{article.data.title}</h3>
+						<p>{article.data.description}</p>
+					</a>
+				))}
+			</div>
+		</section>
+	)}
+
+	<section class="promise">
+		<h2>Our Promise</h2>
+		<ul>
+			<li><strong>Honest recommendations</strong> - We tell you who should NOT use a software, not just who should</li>
+			<li><strong>Real PC requirements</strong> - Not what the marketing says, but what actually works</li>
+			<li><strong>Learning curve reality</strong> - We don't pretend everything is "easy for beginners"</li>
+			<li><strong>Clear decisions</strong> - Every article ends with a straightforward recommendation</li>
+		</ul>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		text-align: center;
+		padding: 3rem 0 2rem;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.hero h1 {
+		font-size: 3rem;
+		line-height: 1.2;
+		margin-bottom: 1.5rem;
+		color: #111;
+	}
+
+	.hero-subtitle {
+		font-size: 1.25rem;
+		color: #555;
+		line-height: 1.6;
+	}
+
+	.intro {
+		max-width: 800px;
+		margin: 4rem auto;
+		padding: 2rem;
+		background: #f8f8f8;
+		border-radius: 8px;
+	}
+
+	.intro h2 {
+		margin-top: 0;
+	}
+
+	.categories {
+		margin: 4rem 0;
+	}
+
+	.category-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1.5rem;
+		margin-top: 2rem;
+	}
+
+	.category-card {
+		padding: 2rem;
+		background: #ffffff;
+		border: 2px solid #e5e5e5;
+		border-radius: 8px;
+		text-decoration: none;
+		transition: all 0.2s;
+	}
+
+	.category-card:hover {
+		border-color: #0066cc;
+		box-shadow: 0 4px 12px rgba(0, 102, 204, 0.1);
+		text-decoration: none;
+	}
+
+	.category-card h3 {
+		color: #111;
+		margin-top: 0;
+		margin-bottom: 0.75rem;
+		font-size: 1.35rem;
+	}
+
+	.category-card p {
+		color: #666;
+		margin-bottom: 0;
+		line-height: 1.6;
+	}
+
+	.featured {
+		margin: 4rem 0;
+	}
+
+	.article-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 1.5rem;
+		margin-top: 2rem;
+	}
+
+	.article-card {
+		padding: 1.75rem;
+		background: #f8f8f8;
+		border-radius: 8px;
+		text-decoration: none;
+		transition: all 0.2s;
+	}
+
+	.article-card:hover {
+		background: #f0f0f0;
+		text-decoration: none;
+	}
+
+	.article-category {
+		display: inline-block;
+		font-size: 0.8rem;
+		font-weight: 600;
+		color: #0066cc;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		margin-bottom: 0.75rem;
+	}
+
+	.article-card h3 {
+		color: #111;
+		margin-top: 0;
+		margin-bottom: 0.75rem;
+		font-size: 1.25rem;
+	}
+
+	.article-card p {
+		color: #666;
+		margin-bottom: 0;
+		line-height: 1.6;
+	}
+
+	.promise {
+		max-width: 800px;
+		margin: 4rem auto;
+		padding: 2rem;
+		background: #f8f8f8;
+		border-radius: 8px;
+	}
+
+	.promise h2 {
+		margin-top: 0;
+	}
+
+	.promise ul {
+		margin-bottom: 0;
+	}
+
+	.promise li {
+		margin-bottom: 1rem;
+		line-height: 1.7;
+	}
+
+	@media (max-width: 768px) {
+		.hero h1 {
+			font-size: 2rem;
+		}
+
+		.hero-subtitle {
+			font-size: 1.1rem;
+		}
+
+		.category-grid,
+		.article-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.intro,
+		.promise {
+			padding: 1.5rem;
+		}
+	}
+</style>

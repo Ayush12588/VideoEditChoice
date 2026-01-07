@@ -1,0 +1,143 @@
+---
+const categories = [
+	{ name: 'Best for Beginners', slug: 'beginners' },
+	{ name: 'Comparisons', slug: 'comparisons' },
+	{ name: 'Free Tools', slug: 'free-tools' },
+	{ name: 'Low-End PC', slug: 'low-end-pc' },
+	{ name: 'Guides', slug: 'guides' }
+];
+---
+
+<header>
+	<nav>
+		<div class="nav-container">
+			<a href="/" class="logo">VideoEditChoice</a>
+			<input type="checkbox" id="menu-toggle" />
+			<label for="menu-toggle" class="menu-icon">
+				<span></span>
+				<span></span>
+				<span></span>
+			</label>
+			<ul class="nav-links">
+				{categories.map(cat => (
+					<li><a href={`/category/${cat.slug}`}>{cat.name}</a></li>
+				))}
+			</ul>
+		</div>
+	</nav>
+</header>
+
+<style>
+	header {
+		background: #ffffff;
+		border-bottom: 1px solid #e5e5e5;
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	}
+
+	nav {
+		width: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1.5rem;
+	}
+
+	.nav-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 70px;
+	}
+
+	.logo {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: #111;
+		text-decoration: none;
+	}
+
+	.logo:hover {
+		text-decoration: none;
+		color: #0066cc;
+	}
+
+	.nav-links {
+		display: flex;
+		list-style: none;
+		gap: 2rem;
+		margin: 0;
+	}
+
+	.nav-links a {
+		color: #555;
+		font-weight: 500;
+		font-size: 0.95rem;
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+
+	.nav-links a:hover {
+		color: #0066cc;
+		text-decoration: none;
+	}
+
+	#menu-toggle {
+		display: none;
+	}
+
+	.menu-icon {
+		display: none;
+		flex-direction: column;
+		cursor: pointer;
+		gap: 4px;
+	}
+
+	.menu-icon span {
+		width: 25px;
+		height: 3px;
+		background: #111;
+		transition: 0.3s;
+	}
+
+	@media (max-width: 768px) {
+		.menu-icon {
+			display: flex;
+		}
+
+		.nav-links {
+			position: absolute;
+			top: 70px;
+			left: 0;
+			right: 0;
+			background: #ffffff;
+			flex-direction: column;
+			gap: 0;
+			padding: 1rem 0;
+			border-bottom: 1px solid #e5e5e5;
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height 0.3s ease;
+		}
+
+		.nav-links li {
+			padding: 0.75rem 1.5rem;
+		}
+
+		#menu-toggle:checked ~ .nav-links {
+			max-height: 400px;
+		}
+
+		#menu-toggle:checked ~ .menu-icon span:nth-child(1) {
+			transform: rotate(45deg) translate(7px, 7px);
+		}
+
+		#menu-toggle:checked ~ .menu-icon span:nth-child(2) {
+			opacity: 0;
+		}
+
+		#menu-toggle:checked ~ .menu-icon span:nth-child(3) {
+			transform: rotate(-45deg) translate(7px, -7px);
+		}
+	}
+</style>

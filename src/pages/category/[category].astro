@@ -1,0 +1,156 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+	const allArticles = await getCollection('articles');
+
+	const categories = [
+		{ slug: 'beginners', name: 'Best for Beginners', description: 'Easy-to-learn video editing software perfect for complete beginners' },
+		{ slug: 'comparisons', name: 'Comparisons', description: 'Head-to-head comparisons to help you decide between different video editing tools' },
+		{ slug: 'free-tools', name: 'Free Tools', description: 'Zero-cost video editing software that actually works for beginners' },
+		{ slug: 'low-end-pc', name: 'Low-End PC Tools', description: 'Video editing software that runs smoothly on older or budget computers' },
+		{ slug: 'guides', name: 'Beginner Guides', description: 'Practical guides on choosing and getting started with video editing' }
+	];
+
+	return categories.map(category => {
+		const categoryArticles = allArticles.filter(article => article.data.category === category.slug);
+		return {
+			params: { category: category.slug },
+			props: {
+				categoryName: category.name,
+				categoryDescription: category.description,
+				articles: categoryArticles
+			}
+		};
+	});
+}
+
+const { categoryName, categoryDescription, articles } = Astro.props;
+---
+
+<Layout
+	title={`${categoryName} | VideoEditChoice`}
+	description={categoryDescription}
+>
+	<div class="category-header">
+		<h1>{categoryName}</h1>
+		<p class="category-description">{categoryDescription}</p>
+	</div>
+
+	{articles.length > 0 ? (
+		<div class="articles-list">
+			{articles.map(article => (
+				<article class="article-preview">
+					<a href={`/articles/${article.slug}`}>
+						<h2>{article.data.title}</h2>
+						<p>{article.data.description}</p>
+						<span class="read-more">Read article →</span>
+					</a>
+				</article>
+			))}
+		</div>
+	) : (
+		<div class="no-articles">
+			<p>Articles coming soon for this category.</p>
+		</div>
+	)}
+</Layout>
+
+<style>
+	.category-header {
+		text-align: center;
+		max-width: 800px;
+		margin: 0 auto 4rem;
+		padding-bottom: 2rem;
+		border-bottom: 2px solid #e5e5e5;
+	}
+
+	.category-header h1 {
+		font-size: 2.75rem;
+		margin-bottom: 1rem;
+		color: #111;
+	}
+
+	.category-description {
+		font-size: 1.25rem;
+		color: #555;
+		line-height: 1.6;
+		margin-bottom: 0;
+	}
+
+	.articles-list {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.article-preview {
+		padding: 2rem;
+		margin-bottom: 1.5rem;
+		background: #f8f8f8;
+		border-radius: 8px;
+		transition: all 0.2s;
+	}
+
+	.article-preview:hover {
+		background: #f0f0f0;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	}
+
+	.article-preview a {
+		text-decoration: none;
+		display: block;
+	}
+
+	.article-preview h2 {
+		color: #111;
+		font-size: 1.75rem;
+		margin-top: 0;
+		margin-bottom: 1rem;
+		transition: color 0.2s;
+	}
+
+	.article-preview:hover h2 {
+		color: #0066cc;
+	}
+
+	.article-preview p {
+		color: #666;
+		line-height: 1.7;
+		margin-bottom: 1rem;
+	}
+
+	.read-more {
+		color: #0066cc;
+		font-weight: 600;
+		font-size: 0.95rem;
+	}
+
+	.no-articles {
+		text-align: center;
+		padding: 4rem 2rem;
+		color: #666;
+	}
+
+	.no-articles p {
+		font-size: 1.1rem;
+	}
+
+	@media (max-width: 768px) {
+		.category-header h1 {
+			font-size: 2rem;
+		}
+
+		.category-description {
+			font-size: 1.1rem;
+		}
+
+		.article-preview {
+			padding: 1.5rem;
+		}
+
+		.article-preview h2 {
+			font-size: 1.5rem;
+		}
+	}
+</style>

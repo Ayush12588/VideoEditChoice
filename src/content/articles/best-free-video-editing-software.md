@@ -37,7 +37,7 @@ Many "free" tools fail these tests. The ones below pass.
 
 **PC requirements:** Works on almost anything
 
-**Know more about CapCut** [Read More](./CapCut.md)
+**Know more about CapCut** Here is My Article about Capcut[Read More](./capcut-beginners.md)
 
 ## 2. DaVinci Resolve (Best Free Professional Tool)
 

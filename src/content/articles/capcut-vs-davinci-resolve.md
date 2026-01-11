@@ -27,6 +27,7 @@ CapCut and DaVinci Resolve are both free, but they're built for completely diffe
 - Day 1: Confusion and frustration
 - Week 1: Still learning the interface
 - Tutorials required for almost everything
+- [You can visit their website from here :[Davinci Resolve]](https://davinciresolvetitles.com?sca_ref=10400415.9MwoC0zW6x)
 
 **Winner for beginners:** CapCut by a mile.
 
